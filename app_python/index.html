@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+    RasKeyTar
+    CSS-Template Information:
+        Road Trip by TEMPLATED
+        templated.co @templatedco
+        Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>MacDagobert's</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header id="header">
+            <div class="logo"><a href="index.html">Your Burger <span>for MATTHIAS</span></a></div>
+            <a href="#menu"><span>Men&uuml;</span></a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="index.html">Start</a></li>
+                <li><a href="neu.html">Neue Bestellung</a></li>
+                <li><a href="alle.html">Alle Bestellungen</a></li>
+            </ul>
+        </nav>
+
+        <!-- Banner -->
+        <!--
+                Note: To show a background image, set the "data-bg" attribute below
+                to the full filename of your image. This is used in each section to set
+                the background image.
+        -->
+        <section id="banner" class="bg-img" data-bg="banner.jpg">
+            <div class="inner">
+                <header>
+                    <h1>Willkommen bei MacDagobert's</h1>
+                </header>
+                <div class="content">
+                    <p>Bitte auf den anderen Geräten die folgende Adresse<br/>
+                        im WebBrowser eingeben:</p>
+                    <p>
+                        <strong><a href="{{request.host_url}}">{{request.host_url}}</a></strong>
+                    </p>
+                    <ul class="actions">
+                        <li><a href="neu.html" class="button special">Neue Bestellung</a></li>
+                        <li><a href="alle.html" class="button">Alle Bestellungen</a></li>
+                        <li><a href="setup.html" class="button alt">SETUP</a></li>
+                    </ul>
+                </div>
+            </div>
+            <a href="neu.html" class="more">Neue Bestellung...</a>
+        </section>
+
+        <!-- Scripts -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/jquery.scrolly.min.js"></script>
+        <script src="/assets/js/jquery.scrollex.min.js"></script>
+        <script src="/assets/js/skel.min.js"></script>
+        <script src="/assets/js/util.js"></script>
+        <script src="/assets/js/main.js"></script>
+    </body>
+</html>
