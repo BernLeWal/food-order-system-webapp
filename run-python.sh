@@ -1,5 +1,5 @@
 #!/bin/bash
-docker rm wrap4u-app >/dev/null
+docker rm wrap4u >/dev/null
 docker run -t -d -p 8080:8080 --name wrap4u wrap4u-app
 echo Container named wrap4u-app started
 echo .
