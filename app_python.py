@@ -5,7 +5,7 @@
 from flask import Flask, send_from_directory
 from flask import request
 from flask import render_template
-import json
+from flask import redirect, abort
 
 webapp = Flask(__name__, template_folder="app_python")
 
@@ -43,8 +43,17 @@ GEMUESE = [
     {"id":409,  "name":"karamelisierter-Zwiebel",   "preis":0.50,   "aktiv":True },
 ]
 
+PRODUCTS = []
+PRODUCTS.extend(SPEISEN)
+PRODUCTS.extend(SAUCEN)
+PRODUCTS.extend(BEILAGEN)
+PRODUCTS.extend(GEMUESE)
 
-BESTELLUNGEN = []
+
+orders = {}
+
+counter = 0
+
 
 # Templates
 @webapp.route("/index.html")
@@ -54,6 +63,45 @@ def send_index():
 @webapp.route("/neu.html")
 def send_neu():
     return render_template("neu.html", speisen=SPEISEN, saucen=SAUCEN, beilagen=BEILAGEN, gemuesen=GEMUESE)
+
+@webapp.route("/bestellung.html", methods=['POST','GET'])
+def send_bestellung():
+    global orders
+    global counter 
+    isNewOrder = False
+    nr = 0
+    items = []
+    totalPrice = 0.0
+    if request.method == 'POST':
+        counter = counter + 1
+        nr = counter
+        isNewOrder = True
+        for speise in PRODUCTS:
+            amount = int(request.form.get(speise['name']))
+            if amount > 0:
+                totalPrice = totalPrice + speise['preis'] * amount
+                item = {
+                    "name":     speise['name'],
+                    "amount":   amount,
+                    "price":    speise['preis']
+                }
+                items.append( item )
+                orders[counter] = items
+    elif request.method == 'GET':
+        nr = request.form.get('Nr')
+        if nr<=0:
+            abort(404)
+        items = orders[nr]
+        if items is None:
+            abort(404)
+        for item in items:
+            totalPrice = totalPrice + item['preis']
+        if request.form.get('Done') == "1":
+            del orders[nr]
+            redirect("alle.html#one")
+    else:
+        abort(405)
+    return render_template("bestellung.html", isNewOrder=isNewOrder, nr=nr, items=items, totalPrice=totalPrice)
 
 # Deliver static content
 @webapp.route("/<path:path>")

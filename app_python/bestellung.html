@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+    RasKeyTar
+    CSS-Template Information:
+        Road Trip by TEMPLATED
+        templated.co @templatedco
+        Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>>Wrap4U's - Bestellung</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+</head>
+<body>
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Wrap 4 U <span>for MATTHIAS</span></a></div>
+    <a href="#menu"><span>Men&uuml;</span></a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="neu.html">Neue Bestellung</a></li>
+        <li><a href="alle.html">Alle Bestellungen</a></li>
+    </ul>
+</nav>
+
+<!-- Banner -->
+<!--
+        Note: To show a background image, set the "data-bg" attribute below
+        to the full filename of your image. This is used in each section to set
+        the background image.
+-->
+{% if isNewOrder %}
+<section id="banner" class="bg-img" data-bg="banner2.jpg">
+    <div class="inner">
+        <header>
+            <h1>Vielen Dank für ihre Bestellung</h1>
+            <h2>Ihre Bestellung hat die Nummer:</h2>
+            <p style="font-size: 72px; font-weight: bold;"><br/>{{ nr }}
+            </p>
+        </header>
+    </div>
+    <a href="#one" class="more">Ihre Bestellung...</a>
+</section>
+{% endif %}
+
+<!-- One -->
+<section id="one" class="wrapper post bg-img" data-bg="banner3.jpg">
+    <div class="inner">
+        <article class="box">
+            <header>
+                <h2>Bestellung Nr {{ nr }}:</h2>
+            </header>
+            <div class="content">
+                <div class="row">
+                    {% for item in items %}
+                    <div>
+                        <img src="images/{{ item.name }}.png"/>
+                        <p><strong>{{ item.name }}
+                        </strong><br/>
+                            {{ item.amount }} * {{ item.price }} &euro;</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <footer>
+                <h2>Bitte bezahlen Sie: </h2>
+                <p style="font-size: 48px;">{{ totalPrice }} &euro;</p>
+            </footer>
+        </article>
+    </div>
+</section>
+
+<!-- Footer -->
+{% if not isNewOrder %}
+<footer id="footer">
+    <div class="inner">
+        <center>
+            <ul class="actions">
+                <li><a href="bestellung.html?Nr={{ nr }}&Done=1" class="button">Erledigt</a></li>
+                <li><a href="alle.html#one" class="button alt">Zurück zu allen Bestellungen</a></li>
+            </ul>
+        </center>
+    </div>
+</footer>
+{% endif %}
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/jquery.scrollex.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
