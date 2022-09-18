@@ -9,10 +9,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>>Wrap4U's - Bestellung</title>
+    <title>Wrap4U's - Alle Bestellungen</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
+    <meta http-equiv="refresh" content="10">
 </head>
 <body>
 <!-- Header -->
@@ -36,60 +37,61 @@
         to the full filename of your image. This is used in each section to set
         the background image.
 -->
-{% if isNewOrder %}
 <section id="banner" class="bg-img" data-bg="banner2.jpg">
     <div class="inner">
         <header>
-            <h1>Vielen Dank für ihre Bestellung</h1>
-            <h2>Ihre Bestellung hat die Nummer:</h2>
-            <p style="font-size: 72px; font-weight: bold;"><br/>{{ nr }}
-            </p>
+            <h1>Einen Guten Tag in die Küche!</h1>
+            <h2>Es gibt <strong>{{ count }}
+            </strong> offene Bestellungen.</h2>
         </header>
     </div>
-    <a href="#one" class="more">Ihre Bestellung...</a>
+    <a href="#one" class="more">Offene Bestellungen...</a>
 </section>
-{% endif %}
 
 <!-- One -->
 <section id="one" class="wrapper post bg-img" data-bg="banner3.jpg">
     <div class="inner">
         <article class="box">
             <header>
-                <h2>Bestellung Nr {{ nr }}:</h2>
+                <h2>Bestellungen:</h2>
             </header>
             <div class="content">
-                <div class="row">
-                    {% for item in items %}
-                    <div>
-                        <img src="images/{{ item.name }}.png"/>
-                        <p><strong>{{ item.name }}
-                        </strong><br/>
-                            {{ item.amount }} * {{ item.preis }} &euro;</p>
-                    </div>
+                <table>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Beschreibung</th>
+                        <th>Preis</th>
+                    </tr>
+                    {% for nr in orders.keys() %}
+                    <!-- TODO: totalPrice -->
+                    <tr onclick="window.location.href = 'bestellung.html?Nr={{ nr }}'">
+                        <td><a href="bestellung.html?Nr={{ nr }}">{{ nr }}
+                        </a></td>
+                        <td><a href="bestellung.html?Nr={{ nr }}">
+                            {% for item in orders[nr] %}
+                                {{ item.amount }}*{{ item.preis }} 
+                            {% endfor %}
+                        </a></td>
+                        <td><a href="bestellung.html?Nr={{ nr }}"> &euro;</a></td>
+                    </tr>
                     {% endfor %}
-                </div>
+                </table>
             </div>
-            <footer>
-                <h2>Bitte bezahlen Sie: </h2>
-                <p style="font-size: 48px;">{{ totalPrice }} &euro;</p>
-            </footer>
         </article>
     </div>
 </section>
 
 <!-- Footer -->
-{% if not isNewOrder %}
 <footer id="footer">
     <div class="inner">
         <center>
             <ul class="actions">
-                <li><a href="bestellung.html?Nr={{ nr }}&Done=1" class="button">Erledigt</a></li>
-                <li><a href="alle.html#one" class="button alt">Zurück zu allen Bestellungen</a></li>
+                <li><a href="alle.html#one" class="button alt">Aktualisieren</a></li>
+                <li><a href="alle.html?Done=1" class="button">Alles erledigt</a></li>
             </ul>
         </center>
     </div>
 </footer>
-{% endif %}
 
 <!-- Scripts -->
 <script src="/assets/js/jquery.min.js"></script>

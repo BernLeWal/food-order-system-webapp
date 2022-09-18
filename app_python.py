@@ -83,25 +83,37 @@ def send_bestellung():
                 item = {
                     "name":     speise['name'],
                     "amount":   amount,
-                    "price":    speise['preis']
+                    "preis":    speise['preis']
                 }
                 items.append( item )
                 orders[counter] = items
     elif request.method == 'GET':
-        nr = request.form.get('Nr')
-        if nr<=0:
+        nr = int(request.args.get('Nr'))
+        if nr <= 0:
+            abort(404)
+        if not nr in orders:
             abort(404)
         items = orders[nr]
         if items is None:
             abort(404)
         for item in items:
+            print(item)
             totalPrice = totalPrice + item['preis']
-        if request.form.get('Done') == "1":
+        if request.args.get('Done') == "1":
             del orders[nr]
-            redirect("alle.html#one")
+            return redirect("alle.html#one")
     else:
         abort(405)
     return render_template("bestellung.html", isNewOrder=isNewOrder, nr=nr, items=items, totalPrice=totalPrice)
+
+@webapp.route("/alle.html")
+def send_alle():
+    global orders
+    if request.args.get('Done') == "1":
+        orders = {}
+    print(orders)
+    return render_template("alle.html", orders=orders, count=len(orders))
+
 
 # Deliver static content
 @webapp.route("/<path:path>")
