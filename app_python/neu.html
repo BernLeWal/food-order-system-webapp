@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--
+    RasKeyTar
+    CSS-Template Information:
+        Road Trip by TEMPLATED
+        templated.co @templatedco
+        Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Wrap4U's - Neue Bestellung</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <script type="text/javascript">
+        function modify(id, val) {
+            item = document.getElementById(id);
+            amount = parseInt(item.value) + val;
+            if (amount < 0)
+                amount = 0;
+            if (amount > 10)
+                amount = 10;
+            item.value = amount;
+        }
+    </script>
+</head>
+<body>
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Wrap 4 U <span>for MATTHIAS</span></a></div>
+    <a href="#menu"><span>Men&uuml;</span></a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="neu.html">Neue Bestellung</a></li>
+        <li><a href="alle.html">Alle Bestellungen</a></li>
+    </ul>
+</nav>
+
+<form action="bestellung.html" method="post">
+    <!-- Banner -->
+    <!--
+            Note: To show a background image, set the "data-bg" attribute below
+            to the full filename of your image. This is used in each section to set
+            the background image.
+    -->
+    <section id="banner" class="bg-img" data-bg="banner2.jpg">
+        <div class="inner">
+            <header>
+                <h1>Ihre Bestellung bitte</h1>
+            </header>
+        </div>
+        <a href="#one" class="more">Etwas zu Essen...</a>
+    </section>
+
+    <!-- One -->
+    <section id="one" class="wrapper post bg-img" data-bg="banner5.jpg">
+        <div class="inner">
+            <article class="box">
+                <header>
+                    <h2>Etwas zu Essen?</h2>
+                </header>
+                <div class="content">
+                    <div class="row">
+                        {% for speise in speisen %}
+                            <div>
+                                <img src="images/{{speise.name}}.png" onclick="modify('{{speise.name}}', +1)"/>
+                                <p><strong>{{speise.name}}</strong><br/>
+                                        {{speise.preis}} &euro;</p>
+                                <p><a href="javascript:modify('{{speise.name}}',+1)" class="button" style="float: left;">+</a>
+                                    <input type="text" id="{{speise.name}}" name="{{speise.name}}"
+                                           style="float: left; width: 64px;" value="0"/>
+                                    <a href="javascript:modify('{{speise.name}}',-1)" class="button"
+                                       style="float: left;">-</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <a href="#two" class="more">Welche Sauce...</a>
+    </section>
+
+    <!-- Two -->
+    <section id="two" class="wrapper post bg-img" data-bg="banner3.jpg">
+        <div class="inner">
+            <article class="box">
+                <header>
+                    <h2>Welche Sauce?</h2>
+                </header>
+                <div class="content">
+                    <div class="row">
+                        {% for sauce in saucen %}
+                            <div>
+                                <img src="images/{{sauce.name}}.png" onclick="modify('{{sauce.name}}', +1)"/>
+                                <p><strong>{{sauce.name}}</strong><br/>
+                                        {{sauce.preis}} &euro;</p>
+                                <p><a href="javascript:modify('{{sauce.name}}',+1)" class="button"
+                                      style="float: left;">+</a>
+                                    <input type="text" id="{{sauce.name}}" name="{{sauce.name}}"
+                                           style="float: left; width: 64px;" value="0"/>
+                                    <a href="javascript:modify('{{sauce.name}}',-1)" class="button"
+                                       style="float: left;">-</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <a href="#three" class="more">Was kommt hinein...</a>
+    </section>
+
+    <!-- Three -->
+    <section id="three" class="wrapper post bg-img" data-bg="banner4.jpg">
+        <div class="inner">
+            <article class="box">
+                <header>
+                    <h2>Was kommt hinein?</h2>
+                </header>
+                <div class="content">
+                    <div class="row">
+                        {% for beilage in beilagen %}
+                            <div>
+                                <img src="images/{{beilage.name}}.png" onclick="modify('{{beilage.name}}', +1)"/>
+                                <p><strong>{{beilage.name}}</strong><br/>
+                                        {{beilage.preis}} &euro;</p>
+                                <p><a href="javascript:modify('{{beilage.name}}',+1)" class="button"
+                                      style="float: left;">+</a>
+                                    <input type="text" id="{{beilage.name}}" name="{{beilage.name}}"
+                                           style="float: left; width: 64px;" value="0"/>
+                                    <a href="javascript:modify('{{beilage.name}}',-1)" class="button"
+                                       style="float: left;">-</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <a href="#four" class="more">Noch was dazu...</a>
+    </section>
+
+    <!-- Four -->
+    <section id="four" class="wrapper post bg-img" data-bg="banner.jpg">
+        <div class="inner">
+            <article class="box">
+                <header>
+                    <h2>Noch was dazu?</h2>
+                </header>
+                <div class="content">
+                    <div class="row">
+                        {% for gemuese in gemuesen %}
+                            <div>
+                                <img src="images/{{gemuese.name}}.png" onclick="modify('{{gemuese.name}}', +1)"/>
+                                <p><strong>{{gemuese.name}}</strong><br/>
+                                        {{gemuese.preis}} &euro;</p>
+                                <p><a href="javascript:modify('{{gemuese.name}}',+1)" class="button"
+                                      style="float: left;">+</a>
+                                    <input type="text" id="{{gemuese.name}}" name="{{gemuese.name}}"
+                                           style="float: left; width: 64px;" value="0"/>
+                                    <a href="javascript:modify('{{gemuese.name}}',-1)" class="button"
+                                       style="float: left;">-</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+
+            <h2>Bestellung abschließen</h2>
+
+            <center>
+                <ul class="actions">
+                    <li><input value="Bestellen" class="button" type="submit"></li>
+                    <li><input value="Zur&uuml;cksetzen" class="button alt" type="reset"></li>
+                </ul>
+            </center>
+
+        </div>
+    </footer>
+
+</form>
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/jquery.scrollex.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

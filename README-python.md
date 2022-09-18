@@ -84,3 +84,4 @@ def index():
 Further Material:
 - A starter tutorial can be found here https://pythonbasics.org/flask-tutorial-templates/
 - For a reference see https://flask.palletsprojects.com/en/2.0.x/api/
+- Templating with Jinja2 in Flask https://code.tutsplus.com/tutorials/templating-with-jinja2-in-flask-essentials--cms-25571 
